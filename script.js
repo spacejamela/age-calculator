@@ -119,12 +119,22 @@ function getDaysInMonth (year, month) {
     return new Date(year, month, 0).getDate();
 }
 // Function to calculate age and create downloadable image
-
-
-document.getElementById('downloadButton').addEventListener('click', function () {
+  document.getElementById('downloadButton').addEventListener('click', function () {
     const downloadableDiv = document.querySelector('.result');
   
-    html2canvas(downloadableDiv).then(function (canvas) {
+    html2canvas(downloadableDiv, {
+      useCORS: true,
+      scrollX: 0,
+      scrollY: 0,
+      windowWidth: document.documentElement.scrollWidth,
+      windowHeight: document.documentElement.scrollHeight,
+      scale: 2,
+      logging: true,
+      width: downloadableDiv.offsetWidth,
+      height: downloadableDiv.offsetHeight,
+      backgroundColor: null,
+      borderRadius: 12 // Set the border radius to 12px
+    }).then(function (canvas) {
       // Create a temporary link element
       const a = document.createElement('a');
       a.href = canvas.toDataURL('image/png'); // Convert canvas to image URL
@@ -132,7 +142,7 @@ document.getElementById('downloadButton').addEventListener('click', function () 
       a.click(); // Trigger the download
     });
   });
-
+  
   
   
   
